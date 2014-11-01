@@ -94,3 +94,17 @@
 
 若采用正则序，求值表达式(test 0 (p))只代换对运算对象0和(p)，而不对它们求值。而求值if表达式时只求值需要的子表达式，所以没有对表达式(p)的求值过程，所以表达式结果为0,不会造成无穷递归。
 
+#1.6
+把if定义为一个常规过程：
+
+```
+(define (new-if predicate then-clause else-clause)
+    (cond (predicate then-clause)
+        (else else-clause)))
+
+(define (sqrt-iter guess x)
+    (new-if (good-enough? guess x)
+        guess
+        (sqrt-iter (improve guess x) x)))
+```
+那么对new-if的调用会使用普通表达式的求值过程。在new-if的else-clause包含了对sqrt-iter的递归调用，因此会无穷递归。
