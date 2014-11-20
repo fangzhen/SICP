@@ -108,3 +108,20 @@
         (sqrt-iter (improve guess x) x)))
 ```
 那么对new-if的调用会使用普通表达式的求值过程。在new-if的else-clause包含了对sqrt-iter的递归调用，因此会无穷递归。
+
+##1.9
+第一个是递归计算过程，第二个是迭代计算过程
+
+##1.10
+```lisp
+(define (f n) (* 2 n))
+(define (g n) (^ 2 n))
+(define (h n)
+    (if (= n 1)
+        2
+        (^ 2 (h (- n 1)))))
+(define (^ x n)
+    (if (< n 1)
+        1
+        (* x (^ x (- n 1)))))
+```
